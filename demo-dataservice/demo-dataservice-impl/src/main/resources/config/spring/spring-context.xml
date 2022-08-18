@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"  
+	xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context     
+           			    http://www.springframework.org/schema/context/spring-context.xsd
+				        http://dubbo.apache.org/schema/dubbo 
+				        http://dubbo.apache.org/schema/dubbo/dubbo.xsd" >
+				        
+    <context:property-placeholder location="classpath:config/**/*.properties" file-encoding="utf-8"/>
+    
+    <dubbo:application name="demo-dataservice"/>
+    
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" id="hello"></dubbo:registry>
+    
+    <dubbo:protocol name="dubbo" port="20880"/>
+    
+    <!-- <bean id="dataServiceDubboService" class="com.example.demo.dataservice.dubboplatform.DataServiceDubboServiceImpl"></bean>
+     -->
+    <dubbo:service interface="com.example.demo.dataservice.api.IDataServiceDubbos" ref="dataServiceDubboServiceImpl"
+                   registry="hello" cluster="failover" loadbalance="leastactive" retries="0" timeout="3000"/>
+    
+    <dubbo:service interface="com.example.demo.dataservice.service.IGenericService" ref="genericServiceimpl" registry="hello"/>
+    
+</beans>

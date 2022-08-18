@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dataservice.study.dao.PersonMapper">
+
+	<select id="selectAll" resultType="java.util.HashMap">
+		select * from team
+	</select>
+
+	<delete id="delete">
+		delete from team
+	</delete>
+
+	<insert id="insert" parameterType="java.lang.String">
+		insert into team (name,age,height,weight,address) value(#{name},#{age},#{height},#{weight},#{address})
+	</insert>
+	
+</mapper>

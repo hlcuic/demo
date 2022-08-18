@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+	xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:dubbo="http://dubbo.apache.org/schema/dubbo" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.dangdang.com/schema/ddframe/reg
+                        http://www.dangdang.com/schema/ddframe/reg/reg.xsd
+                        http://www.dangdang.com/schema/ddframe/job
+                        http://www.dangdang.com/schema/ddframe/job/job.xsd
+                        http://www.springframework.org/schema/context     
+            			http://www.springframework.org/schema/context/spring-context.xsd
+            			http://dubbo.apache.org/schema/dubbo 
+				        http://dubbo.apache.org/schema/dubbo/dubbo.xsd
+                        ">
+    <context:property-placeholder location="classpath:config/**/*.properties" file-encoding="utf-8"/>
+    
+    <import resource="classpath:config/spring/job-reg.xml" ></import>
+    
+     <dubbo:application name="demo-schedule"/>
+     
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" id="hello"/>
+
+    <!--<dubbo:consumer timeout="3000"/>-->
+    
+    <dubbo:reference protocol="dubbo" id="dataServiceDubboServiceImpl" check="false" registry="hello" 
+    interface="com.example.demo.dataservice.api.IDataServiceDubbos"/>
+    
+    <dubbo:reference protocol="dubbo" id="genericService"  generic="true" check="false" registry="hello" 
+    interface="com.example.demo.dataservice.service.IGenericService" />
+    
+</beans>

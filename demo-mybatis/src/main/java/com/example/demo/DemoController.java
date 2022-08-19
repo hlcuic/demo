@@ -14,8 +14,8 @@ public class DemoController {
 	@RequestMapping("/hello")
 	@ResponseBody
 	public String hello(){
-//		int effectCount = service.add();
-		return "hello world! ";
+		int effectCount = service.add();
+		return String.format("hello world,effectCount:%s",effectCount);
 	}
 
 }

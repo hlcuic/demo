@@ -13,7 +13,7 @@ public interface UserMapper {
     @Select({
         "select * from user where name = ${name}"
     })
-    @ResultMap("com.UserMapper.test")
+    @ResultMap("test")
     List<User> selectUser(@Param("name") String name);
 
     int insert(User user);

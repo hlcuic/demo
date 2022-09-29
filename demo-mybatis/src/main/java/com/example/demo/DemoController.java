@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DemoController {
 
 	@Autowired
-	private TestTransactionalService service;
+	private TestService service;
 
 	@RequestMapping("/hello")
 	@ResponseBody

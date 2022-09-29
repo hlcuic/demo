@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 引入外部资源文件
+        resource:默认引入classpath路径下的资源文件
+        url：引入物理路径下的资源文件（如：d:\\jdbc.properties）
+     -->
+    <properties resource="application.properties"></properties>
+    <!-- 设置参数 -->
+    <settings>
+        <!--  开启驼峰匹配：完成经典的数据库命名到java属性的映射
+                          相当于去掉数据中的名字的下划线，和java进行匹配
+        -->
+        <!--<setting name="cacheEnabled" value="true" /> 默认开启，可以不用配置-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!-- 配置别名 -->
+    <typeAliases>
+        <!-- typeAlias:用来配置别名，方便映射文件使用，type:类的全限定类名,alias:别名 -->
+        <typeAlias type="com.example.mybatis.model.User" alias="User"/>
+    </typeAliases>
+    <!--<typeHandlers>
+        <typeHandler javaType="com.Currency" jdbcType="VARCHAR"
+                     handler="com.CurrencyTypeHandler"/>
+    </typeHandlers>-->
+    <!--<plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+        <plugin interceptor="com.MyFirstPlugin">
+            <property name="someProperty" value="100"/>
+        </plugin>
+    </plugins>-->
+    <!-- 配置环境：可以配置多个环境，default：配置某一个环境的唯一标识，表示默认使用哪个环境 -->
+    <environments default="development">
+        <!-- 配置环境,id:环境的唯一标识 -->
+        <environment id="development">
+            <!-- 事务管理器，type:使用jdbc的事务管理器 -->
+            <transactionManager type="JDBC" />
+            <!-- 数据源，type:池类型的数据源 -->
+            <dataSource type="POOLED">
+                <!-- 配置连接信息 -->
+                <property name="driver" value="${jdbc.driverClass}" />
+                <property name="url" value="${jdbc.url}" />
+                <property name="username" value="${jdbc.username}" />
+                <property name="password" value="${jdbc.password}" />
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 配置映射文件：用来配置sql语句和结果集类型等 -->
+    <mappers>
+        <mapper resource="UserMapper.xml" />
+    </mappers>
+</configuration>

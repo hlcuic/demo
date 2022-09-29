@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 测试同一个类事务调用是否生效
  */
 @Service
-public class TestTransactionalService {
+public class TestTransactionalService implements TestService{
 
     @Autowired
     private UserMapper userMapper;
